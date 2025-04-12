@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../public/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+body {
+  background: bisque;
+
+  h1 {
+    color: green;
+    font-family: "Roboto", sans-serif;
+  }
+}
