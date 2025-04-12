@@ -1,3 +1,11 @@
+import "./index.css";
+
+const root = document.querySelector("#app");
+
 function foo() {
-  console.log("Привет, world!");
+  const p = document.createElement("p");
+  root.append(p);
+  console.log("Привет, мир!");
 }
+
+foo();
