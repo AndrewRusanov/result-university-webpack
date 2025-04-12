@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webpack</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Weather sounds</h1>
+      <div class="sound-buttons">
+        <button
+          class="sound-btn"
+          data-sound="rain"
+          data-bg="rainy-bg.jpg"
+          data-icon="cloud-rain.svg"
+        >
+          <img
+            src="assets/icons/cloud-rain.svg"
+            class="btn-icon"
+            alt="cloud-rain"
+          />
+        </button>
+        <button
+          class="sound-btn"
+          data-sound="summer"
+          data-bg="summer-bg.jpg"
+          data-icon="sun.svg"
+        >
+          <img src="assets/icons/sun.svg" class="btn-icon" alt="sun" />
+        </button>
+        <button
+          class="sound-btn"
+          data-sound="winter"
+          data-bg="winter-bg.jpg"
+          data-icon="cloud-snow.svg"
+        >
+          <img
+            src="assets/icons/cloud-snow.svg"
+            class="btn-icon"
+            alt="cloud-snow"
+          />
+        </button>
+      </div>
+      <div class="volume-control">
+        <input
+          type="range"
+          id="volume"
+          min="0"
+          max="1"
+          step="0.1"
+          value="0.5"
+        />
+      </div>
+    </div>
+  </body>
+</html>
