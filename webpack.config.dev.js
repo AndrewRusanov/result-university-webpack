@@ -13,7 +13,7 @@ module.exports = merge(commonConfig, {
   plugins: [
     new ESLintPlugin({
       context: path.resolve(__dirname, "src"),
-      extensions: ["js"],
+      extensions: [".js", ".ts"],
       exclude: ["node_modules"],
       fix: true,
       cache: true,
