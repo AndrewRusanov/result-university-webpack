@@ -1,15 +1,18 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
 
 module.exports = {
   context: path.resolve(__dirname, "src"),
-  entry: "./index.js",
+  entry: "./index.ts",
   output: {
     filename: "[name].[contenthash:8].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".jsx", ".js"],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -61,6 +64,11 @@ module.exports = {
         generator: {
           filename: "assets/images/[name][ext]",
         },
+      },
+      {
+        test: /\.[tj]sx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
     ],
   },

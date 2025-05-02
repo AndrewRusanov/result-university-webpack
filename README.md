@@ -1,28 +1,72 @@
 # Выполнение практического задания
 
 ## Задача
-Настроить полностью Webpack и сдлеать небольшое приложение, которое будет воспроизводить шум природы.
+Переведите свой проект, выполненный в модуле Webpack, на TypeScript.
 
-## Требования
-- аудио не должны накладываться друг на друга, предыдущий звук должен выключаться при включении следующего;
-- при повторном нажатии на одну и ту же кнопку воспроизведение приостанавливается, а если после этого нажать еще раз, то воспроизведение продолжится;
-- после нажатия на кнопку для страницы устанавливается соответствующая фоновая картинка.
+## Изменения
+0. Обновлён конфиг для webpack:
+```javascript
+module.exports = {
+	...остальной код
+	entry: "./index.ts",
+	resolve: {
+    	extensions: [".tsx", ".ts", ".jsx", ".js"],
+  	},
+	 module: {
+		rules: [
+			...остальной код
+		{
+			test: /\.[tj]sx?$/,
+			use: "ts-loader",
+			exclude: /node_modules/,
+		},
+    ],
+  },
+}
+```
 
-## Ход выполнения работы
-1. Инициализировал проект;
-2. Создал ветку `develop` и от неё создал ветку `feature/add-webpack`, в которой производил настройку: устанавливал необходимые плагины, разделял настройку для dev- и prod-режимов;
-3. После завершения настройки Webpack слил изменения в ветку `develop`;
-4. Создал ветку `feature/app`;
-5. Создал ветку `feature/add-eslint`, в которой настроил webpack на работу с линтером, проинициализировал eslint с помощью команды `npx eslint --init`;
-6. После завершения настройки слил изменения в ветку `develop`;
-7. С помощью `git rebase` обновил ветку `feature/app` по `develop` и перешёл к созданию мини-приложения;
-8. Создал разметку со стилями;
-9. Добавил интерактивность с помощью js.
-10. Слил изменения в ветку `develop`.
-11. Открыл Pull Request на слияние в `main`.
+1. Создан `interface` для корректной работы с `data`-атрибутами у `html`-элементов:
+```typescript
+interface SoundButton extends HTMLButtonElement {
+  dataset: {
+    sound: string;
+    bg: string;
+    icon: string;
+  };
+}
+```
+
+2. Обозначены типы для ключевых элементов приложения в момент инициализации приложения:
+```typescript
+  let currentAudio: HTMLAudioElement | null = null;
+  let isPlaying = false;
+  let currentSound: string | null = null;
+  let volume = 0.5;
+```
+
+3. Протипизированы функции, принимающие хотя бы один аргумент:
+	3.1. `playAudio(sound: string)`
+	```typescript
+	function playAudio(sound: string) {
+		currentAudio = new Audio(`assets/sounds/${sound}.mp3`);
+		currentAudio.volume = volume;
+		currentAudio.loop = true;
+		currentAudio.play();
+		isPlaying = true;
+	}
+	```
+	3.2. `setActiveButton(activeButton: SoundButton)`
+	```typescript
+	function setActiveButton(activeButton: SoundButton) {
+    soundButtons.forEach((btn) => {
+      btn.classList.remove("active");
+    });
+    activeButton.classList.add("active");
+  	}
+	```
 
 ### Используемые технологии:
 - HTML, SCSS;
-- JavaScript;
+- TypeScript;
 - Webpack;
 - EsLint.
