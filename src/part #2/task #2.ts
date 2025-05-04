@@ -36,24 +36,24 @@ const posts = [
   },
 ];
 
-interface Data {
+interface PostListDto {
   id: string;
   title: string;
   body: string;
 }
 
-interface Result {
-  byId: { [key in string]: Data };
+interface PostResponseModel {
+  byId: { [key in string]: PostListDto };
   allIds: string[];
 }
 
-const normalizeData = (unnormalizedData: Data[]): Result => {
+const normalizeData = (unnormalizedData: PostListDto[]): PostResponseModel => {
   let allIds: string[] = [];
   const groupById = unnormalizedData.reduce((acc, item) => {
     acc[item.id] = item;
     allIds.push(item.id);
     return acc;
-  }, {} as { [key in string]: Data });
+  }, {} as { [key in string]: PostListDto });
 
   return {
     byId: groupById,
