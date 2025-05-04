@@ -1,6 +1,6 @@
 const COMMENTS_URL = "https://jsonplaceholder.typicode.com/comments";
 
-interface Data {
+interface PostResponseModel {
   postId: number;
   id: number;
   name: string;
@@ -8,11 +8,11 @@ interface Data {
   body: string;
 }
 
-const getData = (url: string): Promise<Data[]> => {
+const getData = (url: string): Promise<PostResponseModel[]> => {
   return fetch(url).then((response) => response.json());
 };
 
-getData(COMMENTS_URL).then((data: Data[]) => {
+getData(COMMENTS_URL).then((data: PostResponseModel[]) => {
   data.map((dataItem) => {
     console.log(`ID: ${dataItem.id}, Email: ${dataItem.email}`);
   });
